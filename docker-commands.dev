@@ -1,0 +1,3 @@
+eval "$(docker-machine env default)"
+mvn compile quarkus:dev
+docker run --ulimit memlock=-1:-1 -it --rm=true --memory-swappiness=0 --name postgres-quarkus-hibernate -e POSTGRES_USER=said -e POSTGRES_PASSWORD=said -e POSTGRES_DB=quarkusdb -p 5432:5432 postgres:10.5
