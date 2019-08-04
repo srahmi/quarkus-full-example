@@ -1,3 +1,6 @@
 eval "$(docker-machine env default)"
 mvn compile quarkus:dev
-docker run --ulimit memlock=-1:-1 -it --rm=true --memory-swappiness=0 --name postgres-quarkus-hibernate -e POSTGRES_USER=said -e POSTGRES_PASSWORD=said -e POSTGRES_DB=quarkusdb -p 5432:5432 postgres:10.5
+docker-machine start
+docker-machine env
+docker run --ulimit memlock=-1:-1 -it --rm=true --memory-swappiness=0 --name postgres-quarkus-hibernate --auth-local -e POSTGRES_USER=said -e POSTGRES_PASSWORD=said -e POSTGRES_DB=quarkusdb -p 5432:5432 postgres:10.5
+ ./mvnw quarkus:add-extension -Dextensions="[<extention-id>]"

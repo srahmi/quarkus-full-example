@@ -1,20 +1,30 @@
 package org.acme.quickstart;
 
-import javax.inject.Inject;
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
-import javax.ws.rs.core.MediaType;
+import org.acme.quickstart.dto.GiftDto;
+import org.eclipse.microprofile.rest.client.inject.RegisterRestClient;
 
-@Path("/hello")
+import javax.inject.Inject;
+import javax.ws.rs.*;
+import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
+import java.util.List;
+
+@Path("/santa-clause")
+@Produces(MediaType.APPLICATION_JSON)
+@Consumes(MediaType.APPLICATION_JSON)
 public class GreetingResource {
 
     @Inject
-    HelloService helloService;
+    SantaClausService santaClausService;
 
     @GET
-    @Produces(MediaType.TEXT_PLAIN)
-    public String hello() {
-        return helloService.hello("Said\n");
+    public List<Gift> getAllGifts() {
+        return santaClausService.getAllGifts();
+    }
+
+    @POST
+    public Response createGift(GiftDto gift){
+        santaClausService.createGift(gift);
+        return Response.ok().build();
     }
 }

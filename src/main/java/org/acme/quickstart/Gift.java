@@ -1,30 +1,21 @@
 package org.acme.quickstart;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+import javax.persistence.*;
 
 @Entity
+@NamedQueries(
+        @NamedQuery(name = "Gift.getAllGifts", query = "SELECT g from Gift g")
+)
+@Data
+@NoArgsConstructor
 public class Gift {
-    private Long id;
-    private String name;
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator="giftSeq")
-    public Long getId() {
-        return id;
-    }
+    private Long id;
+    private String name;
 
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
 }
